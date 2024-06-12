@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { bugService } from './services/bug.service'
+import { bugService } from './services/bug.service.js'
 import { loggerService } from './services/logger.service.js'
 
 const app = express()
@@ -38,4 +38,4 @@ app.get('/api/bug/:bugId/remove', (req, res) => {
         .then(() => res.send(`Bug ${id} deleted...`))
 })
 
-app.listen(port, () => console.log(`Server ready at port ${port}`))
+app.listen(port, () => loggerService.info(`Server ready at port ${port}`))
