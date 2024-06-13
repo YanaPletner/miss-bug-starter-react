@@ -6,6 +6,8 @@ import { loggerService } from './services/logger.service.js'
 const app = express()
 const port = 3030
 
+app.use(express.static('public'))
+
 app.get('/', (req, res) => res.send('Hello there'))
 
 app.get('/api/bug', (req, res) => {
