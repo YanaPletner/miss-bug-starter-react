@@ -2,6 +2,7 @@ import fs from 'fs'
 
 export const utilService = {
     readJsonFile,
+    writeJsonFile,
     makeId,
     makeLorem,
     getRandomIntInclusive
@@ -12,6 +13,18 @@ function readJsonFile(path) {
     const json = JSON.parse(str)
     return json
 }
+
+function writeJsonFile(path, data) {
+    return new Promise((resolve, reject) => {
+        const jsonData = JSON.stringify(data, null, 2)
+
+        fs.writeFile(path, jsonData, (err) => {
+            if (err) return reject(err)
+            resolve()
+        })
+    })
+}
+
 
 function makeId(length = 6) {
     var txt = ''

@@ -4,6 +4,7 @@ import { utilService } from './util.service.js'
 
 const STORAGE_KEY = 'bugDB'
 
+
 export const bugService = {
     query,
     getById,
@@ -13,14 +14,14 @@ export const bugService = {
 
 var bugs = utilService.readJsonFile('./data/bug.json')
 
-
 function query() {
     // return storageService.query(STORAGE_KEY)
     return Promise.resolve(bugs)
 }
 function getById(bugId) {
     // return storageService.get(STORAGE_KEY, bugId)
-    return bugs = bugs.find(bug => bug._id === bugId)
+    const bug = bugs.find(bug => bug._id === bugId)
+    return Promise.resolve(bug)
 }
 function remove(bugId) {
     // return storageService.remove(STORAGE_KEY, bugId)
@@ -37,6 +38,10 @@ function save(bugToSave) {
     } else {
         // return storageService.post(STORAGE_KEY, bug)
         bugToSave._id = utilService.makeId()
+        bugToSave.title = utilService.makeLorem(4)
+        bugToSave.description = utilService.makeLorem(5)
+        bugToSave.severity = utilService.getRandomIntInclusive(0, 10)
+        bugToSave.createdAt = new Date()
         bugs.push(bugToSave)
     }
     return _saveBugsToFile()

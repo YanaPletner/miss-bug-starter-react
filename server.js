@@ -26,16 +26,17 @@ app.get('/api/bug/save', (req, res) => {
 })
 
 app.get('/api/bug/:bugId', (req, res) => {
-    const { id } = req.params
+    const { bugId } = req.params
+    console.log(req.params)
 
-    bugService.getById(id)
+    bugService.getById(bugId)
         .then(bug => res.send(bug))
 })
 
 app.get('/api/bug/:bugId/remove', (req, res) => {
-    const { id } = req.params
-    bugService.remove(id)
-        .then(() => res.send(`Bug ${id} deleted...`))
+    const { bugId } = req.params
+    bugService.remove(bugId)
+        .then(() => res.send(`Bug ${bugId} deleted...`))
 })
 
 app.listen(port, () => loggerService.info(`Server ready at port ${port}`))
